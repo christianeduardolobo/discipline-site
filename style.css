@@ -1,0 +1,87 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+:root{
+    --main-color: rgb(0, 0, 0);
+    --secondary-color: white;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(images/background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-clip: content-box;
+}
+.main-nav{
+    background-color: var(--main-color);
+
+}
+.nav-menu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.nav-link{
+    display: inline-flex;
+    align-items: center;
+    font-family: "Momo Trust Display";
+    padding: 30px;
+    list-style-type: none;
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: 0.3s linear;
+}
+
+.nav-link:hover{
+    transform: scaleX(1.2) scaleY(1.1);
+    color: blue;
+    
+}
+
+
+.toolbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.toolbar-left{
+    margin: 10px;
+}
+.search-input{
+    padding: 4px;
+    border-radius: 10px;
+    text-align: center;
+    width: 30vw;
+}
+
+.toolbar-mid{
+    margin: 10px;
+}
+.btn{
+
+    padding: 5px;
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+    border-radius: 10px;
+    border-style: double;
+    border-color: white;
+    transition: 0.3s linear;
+    font-family: "Momo Trust Display";
+    font-weight: 300;
+}
+.btn:hover{
+    transform: scaleX(1.2) scaleY(1.2);
+    color: blue;
+}
+.toolbar-right{
+    margin: 10px;
+}
