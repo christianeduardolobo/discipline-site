@@ -15,7 +15,7 @@ toast.style.display = 'none'
 function addTask(){
     const textoDigitado = campoDigitar.value.trim();
     if(textoDigitado === ''){
-        alert('You need to write something'); // PRECISO CRIAR UM ALERT MAIS BONITO!!
+        alert('You need to write something'); // TODO: PRECISO CRIAR UM ALERT MAIS BONITO!!
         return;
     }
 
