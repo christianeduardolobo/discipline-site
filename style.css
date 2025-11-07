@@ -1,5 +1,7 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 :root{
     --main-color: rgb(0, 0, 0);
     --secondary-color: white;
@@ -14,11 +16,12 @@
 }
 
 body{
-    background-image: url(images/background.png);
-    background-position: center center;
+    background-color: black;
+    background-image: url(images/background.png); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
+    background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
 }
 .main-nav{
     background: transparent;
@@ -74,7 +77,6 @@ svg{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
     margin-bottom: 30px;
     padding: 0 20px;
     max-width: 1200px;
@@ -129,6 +131,12 @@ svg{
     background-color: var(--hover);
 }
 
+.btn-primary{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 46px;
+}
 
 .tasks-container {
     margin-top: 30px;
@@ -172,17 +180,17 @@ svg{
 }
 
 .tarefa-item{
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    margin: 20px;
+    gap: 20px;
     color: white;
-    font-size: 20px;
-    font-family: "Momo Trust Display";
     list-style-type: none;
-    padding: 10px;
-    margin: 10px;
     background-color: transparent;
     border: 0px;
+    width: 100%;
+    vertical-align: middle;
 }
 .tarefa-item button{
     background-color: transparent;
@@ -190,28 +198,112 @@ svg{
     color: white;
 }
 #taskText{
-    font-family: "Mono Trust Display";
-    font-weight: 900;
-    font-size: 25px;
+    margin-bottom: 5px;
+    font-family: "Momo Trust Display";
+    font-weight: 500;
+    letter-spacing: 1.3px;
+    font-style: italic;
+    font-size: 30px;
     background-color: transparent;
     cursor: pointer;
+    white-space: normal;        /* permite quebra de linha */
+    word-break: break-word;     /* quebra palavras grandes */
+    overflow-wrap: break-word;
+    max-width: 50ch; 
     transition: 0.3s linear;
 }
+
 #taskText:hover{
     color: var(--hover);
-    transform: scale(1.1);
+    transform: translateX(-3px);
 }
-.tarefa-item svg{
+#svgTask{
     cursor: pointer;
     fill: white;
     transition: 0.3s linear;
 }
-.tarefa-item svg:hover{
+
+#svgTask:hover{
     fill: var(--hover);
-    transform: scale(1.1);
+    scale: 1.2;
 }
 
+.overlay{
+    display: none; /* Começa escondido */
+    position: fixed; /* Fixa na tela toda */
+    top: 0;
+    left: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.7); /* Preto com 70% transparência */
+    backdrop-filter: blur(3px); /* Blur no fundo */
+    -webkit-backdrop-filter: blur(3px); /* Para Safari */
+    z-index: 1000; /* Fica acima de tudo menos do popup */
+    animation: fadeIn 0.3s ease; /* Animação suave */
+}
 
+.confirm-toast{
+    font-family: "Momo Trust Display";
+    font-style: italic;
+    border: 2px solid var(--hover);
+    border-bottom: 0px;
+    border-right: 0px;
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    background: transparent;
+    
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    
+    /* CENTRALIZAÇÃO PERFEITA */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001; /* Acima do overlay */
+    
+    /* Tamanho fixo para ficar bonito */
+    min-width: 250px;
+    animation: slideIn 0.3s ease;
+}
+.confirm-toast p {
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+.toast-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+#btnConfirmar, #btnCancelar {
+    font-family: "Momo Trust Display";
+    font-style: italic;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+#btnConfirmar:hover {
+    transform: scale(1.05);
+    background-color: var(--hover);
+}
+
+#btnCancelar:hover {
+    transform: scale(1.05);
+    background-color: var(--hover);
+}
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
@@ -244,11 +336,20 @@ svg{
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
