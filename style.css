@@ -17,7 +17,7 @@
 
 body{
     background-color: black;
-    background-image: url(images/background.png); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
+    background-image: url(); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -138,6 +138,7 @@ svg{
     height: 46px;
 }
 
+
 .tasks-container {
     margin-top: 30px;
 }
@@ -197,7 +198,21 @@ svg{
     border-width: 0px;
     color: white;
 }
-#taskText{
+
+
+.tarefa-item.dragging {
+    opacity: 0.4;
+    outline: 1px dashed var(--hover);
+    width: 100%;
+}
+
+.btn-ativo{
+    background-color: var(--hover);
+    color: black;
+}
+
+
+.textTyped{
     margin-bottom: 5px;
     font-family: "Momo Trust Display";
     font-weight: 500;
@@ -213,10 +228,13 @@ svg{
     transition: 0.3s linear;
 }
 
-#taskText:hover{
+.textTyped.hover:hover{
     color: var(--hover);
     transform: translateX(-3px);
+
 }
+
+
 #svgTask{
     cursor: pointer;
     fill: white;
