@@ -17,7 +17,7 @@
 
 body{
     background-color: black;
-    background-image: url(); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
+    background-image: url(images/background.png); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
