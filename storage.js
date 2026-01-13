@@ -1,18 +1,5 @@
 // storage.js
 // Camada de dados + regras compartilhadas (sem DOM).
-// Este arquivo precisa ser carregado ANTES do app.js e do dashboard.js.
-//
-// Disponibiliza globalmente:
-// - loadTasks()
-// - saveTasks(tarefas)
-// - shouldShowToday(tarefa)
-//
-// (Bônus para o dashboard depois):
-// - todayKey()
-// - disciplineToday(tarefas)
-// - loadDisciplineSeries()
-// - saveDisciplineSeries(serie)
-// - upsertDisciplinePoint(tarefas)
 
 const STORAGE_KEYS = {
   tarefas: 'minhasTarefas',
@@ -20,9 +7,8 @@ const STORAGE_KEYS = {
   ultimaData: 'ultimaDataApp'
 };
 
-// ----------------------------
+
 // Tarefas: load/save
-// ----------------------------
 function saveTasks(tarefas) {
   localStorage.setItem(STORAGE_KEYS.tarefas, JSON.stringify(tarefas));
 }
@@ -54,9 +40,8 @@ function loadTasks() {
   return tarefas;
 }
 
-// ----------------------------
+
 // Regras: aparece hoje?
-// ----------------------------
 function diaAtualCodigo() {
   const hoje = new Date().getDay(); // 0=Dom ... 6=Sab
   const mapa = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab'];
@@ -71,9 +56,8 @@ function shouldShowToday(tarefa) {
   return tarefa.dias.includes(diaAtualCodigo());
 }
 
-// ----------------------------
+
 // Disciplina: série por dia (para dashboard)
-// ----------------------------
 function todayKey() {
   const d = new Date();
   const y = d.getFullYear();
@@ -83,7 +67,6 @@ function todayKey() {
 }
 
 // Modelo simples: se virou o dia, zera "concluida" para começar o dia limpo.
-// Use isso se você quiser disciplina diária sem histórico por tarefa.
 function resetDoneIfNewDay(tarefas) {
   const hoje = todayKey();
   const ultima = localStorage.getItem(STORAGE_KEYS.ultimaData);
@@ -131,7 +114,6 @@ function upsertDisciplinePoint(tarefas) {
   return serie;
 }
 
-// Exponho também o reset caso você use depois (opcional)
 window.resetDoneIfNewDay = resetDoneIfNewDay;
 window.disciplineToday = disciplineToday;
 window.loadDisciplineSeries = loadDisciplineSeries;

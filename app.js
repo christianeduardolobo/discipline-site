@@ -1,14 +1,10 @@
-// ============================
 // app.js (PÁGINA DE HÁBITOS)
 // Depende do storage.js expor:
 // - loadTasks()
 // - saveTasks(tarefas)
 // - shouldShowToday(tarefa)
-// ============================
 
-// ============================
 // SELETORES / ELEMENTOS DOM
-// ============================
 const campoDigitar   = document.querySelector('.search-input');
 const minhaLista     = document.getElementById('tasksList');
 const mensagemVazia  = document.querySelector('.empty-state');
@@ -29,9 +25,8 @@ const icon         = btnReorder?.querySelector?.('.reorder-icon');
 
 const DOT = { alta: "🔴", media: "🟡", baixa: "🟢" };
 
-// ============================
+
 // ESTADO GLOBAL
-// ============================
 let reordenando       = false;
 let tarefas           = [];   // Array com TODAS as tarefas
 let tarefaEditando    = null; // Tarefa sendo editada no modal
@@ -40,9 +35,7 @@ let tarefaParaRemover = null; // Tarefa pendente no toast de confirmação
 if (toast) toast.style.display = 'none';
 if (emptyNotificacao) emptyNotificacao.style.display = 'none';
 
-// ============================
 // UTIL: garante que storage.js está carregado
-// ============================
 function assertStorageReady() {
   const ok = typeof loadTasks === 'function'
           && typeof saveTasks === 'function'
@@ -54,9 +47,8 @@ function assertStorageReady() {
   return ok;
 }
 
-// ============================
+
 // UI: cria o <li> da tarefa
-// ============================
 function criarElementoTarefa(tarefa) {
   const li = document.createElement('li');
   li.dataset.id = tarefa.id;
@@ -83,9 +75,8 @@ function criarElementoTarefa(tarefa) {
   return li;
 }
 
-// ============================
+
 // UI: renderiza hábitos do dia
-// ============================
 function renderizarHabitosDoDia() {
   if (!minhaLista || !mensagemVazia) return;
 

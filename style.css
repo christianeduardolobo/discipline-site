@@ -2,27 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* =========================
-   VARIÁVEIS GLOBAIS
-========================= */
+
 :root{
     --main-color: rgb(0, 0, 0);
     --secondary-color: white;
     --hover: #0049d1;
 }
 
-/* =========================
-   RESET BÁSICO
-========================= */
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* =========================
-   BODY / BACKGROUND
-========================= */
+
 body, html{
     height: 100%; /* Garante que o body e html ocupem toda a altura da tela */
 }
@@ -35,9 +29,7 @@ body{
     height: 97vh;
     user-select: none;
 }
-/* =========================
-   MODAL DE HÁBITO
-========================= */
+
 .modal-habit {
     display: none;
     position: fixed;
@@ -144,9 +136,7 @@ body{
     box-shadow: 0 4px 12px rgba(0, 73, 209, 0.3);
 }
 
-/* =========================
-   FORM / CAMPOS
-========================= */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -188,9 +178,6 @@ body{
     position: relative;
 }
 
-/* =========================
-   SELECT / CATEGORIA
-========================= */
 .modal-select{
     width: 100%;
     padding: 10px 42px 10px 12px;  /* espaço à direita pra seta */
@@ -260,9 +247,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg);
 }
 
-/* =========================
-   DIAS DA SEMANA
-========================= */
+
 .dias-semana {
     display: flex;
     gap: 10px;
@@ -292,9 +277,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     transform: scale(1.1);
 }
 
-/* =========================
-   PRIORIDADE
-========================= */
+
 .priority-buttons {
     display: flex;
     gap: 10px;
@@ -326,10 +309,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     
 }
 
-
-/* =========================
-   SWITCH DE STATUS
-========================= */
 .switch {
     position: relative;
     display: inline-block;
@@ -381,9 +360,6 @@ input:checked + .slider:before {
     font-family: "Momo Trust Display";
 }
 
-/* =========================
-   NAVBAR
-========================= */
 .main-nav{
     background: transparent;
 }
@@ -431,9 +407,6 @@ svg{
     fill: currentColor; 
 }
 
-/* =========================
-   MAIN / TOOLBAR
-========================= */
 .main-content {
     max-width: 1200px;
     margin: 40px auto;
@@ -460,9 +433,6 @@ svg{
     align-items: center;
 }
 
-/* =========================
-   INPUT DE BUSCA / BOTÕES
-========================= */
 .search-input{
     width: 100%;
     padding: 12px 10px;
@@ -514,9 +484,7 @@ svg{
     color: black;
 }
 
-/* =========================
-   LISTA DE TAREFAS
-========================= */
+
 .tasks-container {
     margin-top: 30px;
     animation: fadeIn 0.5s ease;
@@ -585,7 +553,7 @@ svg{
     width: 100%;
 }
 
-/* Texto da tarefa */
+
 .textTyped{
     margin-bottom: 5px;
     font-family: "Momo Trust Display";
@@ -619,9 +587,6 @@ svg{
     scale: 1.2;
 }
 
-/* =========================
-   OVERLAY / TOASTS
-========================= */
 .overlay{
     display: none; /* Começa escondido */
     position: fixed; /* Fixa na tela toda */
@@ -747,9 +712,6 @@ svg{
     background-color: var(--hover);
 }
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
 @media (max-width: 768px) {
     .nav-menu {
         font-size: 14px;
@@ -776,9 +738,7 @@ svg{
     }
 }
 
-/* =========================
-   ANIMAÇÕES
-========================= */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
