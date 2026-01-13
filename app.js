@@ -102,9 +102,7 @@ function renderizarHabitosDoDia() {
   mensagemVazia.style.display = 'none';
 }
 
-// ============================
 // CRUD DE TAREFAS
-// ============================
 function proximaOrdem() {
   if (!tarefas.length) return 0;
   const max = Math.max(...tarefas.map(t => Number(t.ordem ?? 0)));
@@ -231,9 +229,7 @@ function salvarOrdemPeloDOM() {
   saveTasks(tarefas);
 }
 
-// ============================
 // DRAG & DROP
-// ============================
 function handleDragOver(e) {
   e.preventDefault();
   const sortableList = minhaLista;
@@ -294,9 +290,7 @@ if (btnReorder) {
   });
 }
 
-// ============================
 // TOAST / CONFIRMAÇÃO / OVERLAY
-// ============================
 if (btnOk) {
   btnOk.addEventListener('click', () => {
     if (emptyNotificacao) emptyNotificacao.style.display = 'none';
@@ -364,18 +358,14 @@ document.addEventListener('keydown', (evento) => {
   }
 });
 
-// ============================
 // INPUT PRINCIPAL (ENTER)
-// ============================
 if (campoDigitar) {
   campoDigitar.addEventListener('keypress', (evento) => {
     if (evento.key === 'Enter') addTask();
   });
 }
 
-// ============================
 // CUSTOM SELECT (se você usar depois)
-// ============================
 document.querySelectorAll(".custom-select .options li").forEach(option => {
   option.addEventListener("click", function() {
     const value = this.getAttribute("data-value");
@@ -387,9 +377,7 @@ document.querySelectorAll(".custom-select .options li").forEach(option => {
   });
 });
 
-// ============================
 // DOMCONTENTLOADED
-// ============================
 document.addEventListener('DOMContentLoaded', () => {
   if (!assertStorageReady()) return;
 
