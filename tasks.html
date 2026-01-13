@@ -7,13 +7,112 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="modal-habit" id="modalHabit">
+    <div class="modal-habit-content">
+        <div class="modal-habit-header">
+            <h2>Configurar Hábito</h2>
+            <button class="modal-close" onclick="fecharModalHabit()">&times;</button>
+        </div>
+        
+        <div class="modal-habit-body">
+            <!-- Nome do Hábito -->
+            <div class="form-group">
+                <label>Nome do Hábito:</label>
+                <input type="text" id="habitName" class="modal-input" placeholder="Ex: Academia">
+            </div>
+
+            <!-- Categoria -->
+            <div class="form-group">
+                <label>Categoria:</label>
+                <select id="habitCategory" class="modal-select">
+                    <option value="saude">Saúde</option>
+                    <option value="carreira">Carreira</option>
+                    <option value="financas">Finanças</option>
+                    <option value="lazer">Lazer/Recuperação</option>
+                    <option value="estudo">Estudo</option>
+                    <option value="relacionamentos">Relacionamentos</option>
+                    <option value="sono">Sono</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+
+            <!-- Dias da Semana -->
+            <div class="form-group">
+                <label>Dias da Semana:</label>
+                <div class="dias-semana">
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="dom">
+                        <span>Dom</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="seg">
+                        <span>Seg</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="ter">
+                        <span>Ter</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="qua">
+                        <span>Qua</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="qui">
+                        <span>Qui</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="sex">
+                        <span>Sex</span>
+                    </label>
+                    <label class="dia-checkbox">
+                        <input type="checkbox" value="sab">
+                        <span>Sáb</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Prioridade -->
+            <div class="form-group">
+                <label>Prioridade:</label>
+                <div class="priority-buttons">
+                    <button class="priority-btn" data-priority="alta">🔴 Alta</button>
+                    <button class="priority-btn" data-priority="media">🟡 Média</button>
+                    <button class="priority-btn" data-priority="baixa">🟢 Baixa</button>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+                <label>Status:</label>
+                <label class="switch">
+                    <input type="checkbox" id="habitDone">
+                    <span class="slider"></span>
+                </label>
+                <span id="statusText">Não concluído</span>
+            </div>
+
+            <!-- Notas -->
+            <div class="form-group">
+                <label>Observações:</label>
+                <textarea id="habitNotes" class="modal-textarea" placeholder="Adicione notas sobre este hábito..."></textarea>
+            </div>
+        </div>
+
+        <div class="modal-habit-footer">
+            <button class="btn-modal-delete" id="deletePop">Deletar</button>
+            <button class="btn-modal-save" onclick="salvarHabito()">Salvar</button>
+        </div>
+    </div>
+</div>
+
+
+
     <nav class="main-nav">
         <div class="nav-container">
             <ul class="nav-menu">
-                <li><a href="tasks.html" class="nav-link active">Meus Hábitos</a></li>
-                <li><a href="#profile" class="nav-link"> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-240Zm-320 80v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q37 0 73 4.5t72 14.5l-67 68q-20-3-39-5t-39-2q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32h240v80H160Zm400 40v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T903-340L683-120H560Zm300-263-37-37 37 37ZM620-180h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19ZM480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Z"/></svg> Perfil</a></li>
-                <li><a href="#stats" class="nav-link">Tracks</a></li>
-                <li><a href="#settings" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg> Configurações</a></li>
+                <li><a href="tasks.html" class="nav-link"> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-240Zm-320 80v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q37 0 73 4.5t72 14.5l-67 68q-20-3-39-5t-39-2q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32h240v80H160Zm400 40v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T903-340L683-120H560Zm300-263-37-37 37 37ZM620-180h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19ZM480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Z"/></svg> Meus Hábitos</a></li>
+                <li><a href="dashboard.html" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg> Dashboard</a></li>
             </ul>
         </div>
     </nav>
@@ -38,7 +137,6 @@
                 </button>
             </div>
         </div>
-
         <!-- Container de Tarefas -->
         <div class="tasks-container">
             <div class="empty-state">
@@ -59,9 +157,15 @@
             </div>
         </div>                           
     </main>
+    <div class="empty-notificacao" id="emptyNotificacao">
+            <p>Você precisa digitar algo!</p>
+            <div class="notificacao-button">
+                <button id="btnOk">OK</button>
+            </div>
+    </div>
 </div>
 
-    
-    <script src="app.js"></script>
+    <script src="storage.js" defer></script>
+    <script src="app.js" defer></script>
 </body>
 </html>

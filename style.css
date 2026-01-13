@@ -2,35 +2,398 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
+/* =========================
+   VARIÁVEIS GLOBAIS
+========================= */
 :root{
     --main-color: rgb(0, 0, 0);
     --secondary-color: white;
-    --hover: rgb(0, 73, 209);
+    --hover: #0049d1;
 }
 
-
+/* =========================
+   RESET BÁSICO
+========================= */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* =========================
+   BODY / BACKGROUND
+========================= */
+body, html{
+    height: 100%; /* Garante que o body e html ocupem toda a altura da tela */
+}
 body{
     background-color: black;
-    background-image: url(images/background.png); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
-    background-position: center top;
+    background-image: url(images/atheism.png); /*O USUARIO VAI PODER ALTERAR O FUNDO DEPOIS!! LEMBRAR DISSO*/
+    background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
+    background-size: contain;
+    height: 97vh;
+    user-select: none;
 }
+/* =========================
+   MODAL DE HÁBITO
+========================= */
+.modal-habit {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-habit-content {
+    overflow-y: scroll;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE e Edge Legacy */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: none;
+    border: 2px solid var(--hover);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+.modal-habit-content::-webkit-scrollbar {
+  display: none;  /* Chrome e Safari */
+}
+
+.modal-habit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.modal-habit-header h2 {
+    color: white;
+    font-family: "Momo Trust Display";
+    text-align: center;
+    font-size: 24px;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg) scale(1.2);
+    color: var(--hover);
+}
+
+.modal-habit-body {
+    padding: 25px;
+}
+
+/* Footer do Modal */
+.modal-habit-footer {
+    padding: 20px 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-modal-delete, .btn-modal-save {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: "Momo Trust Display";
+    font-size: 16px;
+    transition: all 0.3s;
+    color: white;
+}
+
+.btn-modal-delete {
+    background: transparent;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+}
+
+.btn-modal-delete:hover {
+    background: #ff4444;
+    color: white;
+}
+
+.btn-modal-save {
+    background: var(--hover);
+}
+
+.btn-modal-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 73, 209, 0.3);
+}
+
+/* =========================
+   FORM / CAMPOS
+========================= */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    font-family: "Momo Trust Display";
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.modal-input, .modal-select, .modal-textarea {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-family: "Momo Trust Display";
+}
+
+.modal-input:focus, .modal-select:focus, .modal-textarea:focus {
+    outline: none;
+    border-color: var(--hover);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.modal-input{
+    margin-top: 0px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+/* =========================
+   SELECT / CATEGORIA
+========================= */
+.modal-select{
+    width: 100%;
+    padding: 10px 42px 10px 12px;  /* espaço à direita pra seta */
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background-color: transparent;
+    color: #fff;
+    font-size: 14px;
+
+    /* remove seta nativa */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* seta branca em SVG (definida por background-image se quiser) */
+}
+.modal-select::-ms-expand {
+    display: none;
+}
+
+#habitCategory{
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.select-box {
+    position: relative;
+    width: 100%;
+    background: none; /* fundo discreto, pode mudar */
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+/* Deixar o select transparente e sem estilo nativo */
+.select-box select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    width: 100%;
+    font-size: 15px;
+
+    color: #fff; /* texto branco */
+}
+
+/* Opções do dropdown (alguns navegadores respeitam isso) */
+select option {
+    background: var(--hover);
+    color: #fff;
+}
+
+/* =========================
+   INPUT TIME
+========================= */
+#habitTime{
+    fill: white;
+    cursor: text;
+}
+#habitName{
+    cursor: text;
+}
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg);
+}
+
+/* =========================
+   DIAS DA SEMANA
+========================= */
+.dias-semana {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dia-checkbox {
+    cursor: pointer;
+}
+
+.dia-checkbox input {
+    display: none;
+}
+
+.dia-checkbox span {
+    display: block;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    transition: all 0.3s;
+}
+
+.dia-checkbox input:checked + span {
+    background: var(--hover);
+    transform: scale(1.1);
+}
+
+/* =========================
+   PRIORIDADE
+========================= */
+.priority-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.priority-btn {
+    flex: 1;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: "Momo Trust Display";
+}
+
+.priority-btn:hover {
+    transform: scale(1.05);
+}
+
+.priority-btn.active {
+    background: var(--hover);
+    transform: scale(1.1);
+}
+#priorityShow.show{
+    display: flex;
+    
+    
+}
+
+
+/* =========================
+   SWITCH DE STATUS
+========================= */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background: var(--hover);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+#statusText {
+    color: white;
+    font-family: "Momo Trust Display";
+}
+
+/* =========================
+   NAVBAR
+========================= */
 .main-nav{
     background: transparent;
 }
+
 .nav-container{
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
+
 .nav-menu{
     display: flex;
     justify-content: center;
@@ -61,12 +424,16 @@ body{
     border: 1px solid white;
     color: var(--hover);
 }
-/*Corrigindo o SVG a cor */
+
+/* Corrigindo o SVG a cor */
 svg{
     transition: fill 0.3s ease;
     fill: currentColor; 
 }
 
+/* =========================
+   MAIN / TOOLBAR
+========================= */
 .main-content {
     max-width: 1200px;
     margin: 40px auto;
@@ -83,6 +450,7 @@ svg{
     margin-left: auto;
     margin-right: auto;
 }
+
 .toolbar-left{
     display: flex;
     flex-direction: row;
@@ -90,8 +458,11 @@ svg{
     min-width: 250px;
     max-width: 1000px;
     align-items: center;
-    
 }
+
+/* =========================
+   INPUT DE BUSCA / BOTÕES
+========================= */
 .search-input{
     width: 100%;
     padding: 12px 10px;
@@ -99,7 +470,6 @@ svg{
     text-align: center;
     background: transparent;
     border: 1px solid var(--secondary-color);
-    
     color: var(--text-primary);
     font-size: 16px;
     transition: all 0.3s ease;
@@ -107,7 +477,6 @@ svg{
 }
 
 .btn{
-    
     color: var(--secondary-color);
     background-color: transparent;
     align-items: center;
@@ -120,12 +489,13 @@ svg{
     transition: all 0.3s ease;
     border: 1px solid white;
     white-space: nowrap;
-    
 }
+
 .btn-secondary{
     display: flex;
     align-items: center;
 }
+
 .btn:hover{
     transform: translateX(-2px);
     background-color: var(--hover);
@@ -138,9 +508,18 @@ svg{
     height: 46px;
 }
 
+/* Botão Reordenar ativo */
+.btn-ativo{
+    background-color: var(--hover);
+    color: black;
+}
 
+/* =========================
+   LISTA DE TAREFAS
+========================= */
 .tasks-container {
     margin-top: 30px;
+    animation: fadeIn 0.5s ease;
 }
 
 .empty-state {
@@ -193,12 +572,12 @@ svg{
     width: 100%;
     vertical-align: middle;
 }
+
 .tarefa-item button{
     background-color: transparent;
     border-width: 0px;
-    color: white;
+    color: rgb(255, 255, 255);
 }
-
 
 .tarefa-item.dragging {
     opacity: 0.4;
@@ -206,12 +585,7 @@ svg{
     width: 100%;
 }
 
-.btn-ativo{
-    background-color: var(--hover);
-    color: black;
-}
-
-
+/* Texto da tarefa */
 .textTyped{
     margin-bottom: 5px;
     font-family: "Momo Trust Display";
@@ -230,10 +604,9 @@ svg{
 
 .textTyped.hover:hover{
     color: var(--hover);
+    text-shadow: black 5px 2px 10px;
     transform: translateX(-3px);
-
 }
-
 
 #svgTask{
     cursor: pointer;
@@ -246,6 +619,9 @@ svg{
     scale: 1.2;
 }
 
+/* =========================
+   OVERLAY / TOASTS
+========================= */
 .overlay{
     display: none; /* Começa escondido */
     position: fixed; /* Fixa na tela toda */
@@ -287,6 +663,7 @@ svg{
     min-width: 250px;
     animation: slideIn 0.3s ease;
 }
+
 .confirm-toast p {
     font-size: 20px;
     margin: 0;
@@ -323,7 +700,56 @@ svg{
     background-color: var(--hover);
 }
 
-/* RESPONSIVIDADE */
+.empty-notificacao{
+    font-family: "Momo Trust Display";
+    font-style: italic;
+    border: 2px solid var(--hover);
+    border-top: 0px;
+    border-left: 0px;
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    background: transparent;
+    
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    
+
+    /* CENTRALIZAÇÃO PERFEITA */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001; /* Acima do overlay */
+
+    min-width: 250px;
+    animation: slideIn 0.3s ease;
+}
+
+#btnOk{
+    font-family: "Momo Trust Display";
+    font-style: italic;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+#btnOk:hover{
+    transform: scale(1.05);
+    background-color: var(--hover);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
 @media (max-width: 768px) {
     .nav-menu {
         font-size: 14px;
@@ -350,7 +776,9 @@ svg{
     }
 }
 
-/* ANIMAÇÕES SUAVES */
+/* =========================
+   ANIMAÇÕES
+========================= */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -369,9 +797,4 @@ svg{
         opacity: 1;
         transform: translate(-50%, -50%) scale(1);
     }
-}
-
-
-.tasks-container {
-    animation: fadeIn 0.5s ease;
 }
